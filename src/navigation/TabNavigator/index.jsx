@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo, Feather } from '@expo/vector-icons';
-import { colors } from '../../global/colors';
-import StackNavigatorIot from '../StackNavigatorIot';
+
 import HomeComponent from '../../page/homeComponent';
+import StackNavigatorIot from '../StackNavigatorIot';
+import { colors } from '../../global/colors';
 
 export default function TabNavigator() {
   const Tab = createBottomTabNavigator();
