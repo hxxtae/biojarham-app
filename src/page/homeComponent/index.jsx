@@ -1,15 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors } from '../../global/colors';
+
+import { styles as S } from './styles';
 
 export default function HomeComponent() {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.titleBox}>
-        <Text style={styles.title}>Biojarham</Text>
-      </View>
-      <ScrollView>
+    <SafeAreaView style={S.container}>
+      <ScrollView stickyHeaderIndices={[0]}>
+        <View style={S.titleBox}>
+          <Text style={S.title}>BIOJARHAM</Text>
+        </View>
         <View>
           <Text>Home</Text>
         </View>
@@ -18,20 +19,3 @@ export default function HomeComponent() {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-    paddingHorizontal: 24,
-  },
-  titleBox: {
-    backgroundColor: colors.background,
-    marginVertical: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
-    color: colors.text
-  },
-})
