@@ -9,7 +9,7 @@ export default function StackNavigatorIot() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Stack.Navigator initialRouteName='IotComponent' >
+    <Stack.Navigator initialRouteName='Iot' >
       <Stack.Screen name='Iot' component={IotComponent} options={{
         headerShown: false
       }} />
