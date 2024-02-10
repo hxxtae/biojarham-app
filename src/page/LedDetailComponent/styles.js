@@ -2,6 +2,18 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../global/colors';
 
 export const styles = StyleSheet.create({
+  titleBox: {
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: colors.background,
+    paddingTop: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: colors.text
+  },
+
   container: {
     paddingHorizontal: 24,
     paddingTop: 20,
