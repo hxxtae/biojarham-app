@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../../../global/colors';
 
 export const styles = StyleSheet.create({
-  rgbDetailBox: {
+  rgbDetailBox: (light) => ({
     flex: 1,
     padding: 10,
     borderRadius: 8,
-    backgroundColor: colors.first,
-  },
+    backgroundColor: light ? colors.tertiary : colors.first,
+  }),
   
   wrapperTop: {
     flexDirection: 'row',
