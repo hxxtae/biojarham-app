@@ -1,13 +1,13 @@
 import { Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useState } from 'react';
+import { produce } from 'immer';
 import Slider from '@react-native-community/slider';
 import PropTypes from 'prop-types';
 
 import { colors } from '../../global/colors';
 import { styles as S } from './styles';
-import { useState } from 'react';
-import { produce } from 'immer';
 
 LedDetailComponent.propTypes = {
   kindName: PropTypes.string.isRequired,

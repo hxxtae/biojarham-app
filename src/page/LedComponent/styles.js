@@ -19,4 +19,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     backgroundColor: colors.first,
   },
+  powerBtn: (state) => ({
+    backgroundColor: state ? colors.foreground : colors.first,
+  })
 })

@@ -1,13 +1,13 @@
 import { Switch, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { useCallback, useState } from 'react';
+import { produce } from 'immer';
 import PropTypes from 'prop-types';
 
 import { colors } from '../../../../global/colors';
 import { styles as S } from './styles';
-import { useCallback, useState } from 'react';
 import BottomSheet from '../../../../components/BottomSheet';
 import LedDetailComponent from '../../../LedDetailComponent';
-import { produce } from 'immer';
 
 LedDetailItem.propTypes = {
   kindName: PropTypes.string.isRequired,
