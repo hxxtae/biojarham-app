@@ -56,14 +56,14 @@ export const styles = StyleSheet.create({
     gap: 15,
     
   },
-  rgbBtn: {
+  rgbBtn: (state) => ({
     flex: 1,
     height: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.first,
+    backgroundColor: state ? colors.tertiary :  colors.first,
     borderRadius: 8,
-  },
+  }),
   btnWrapper: {
     alignItems: 'center',
     gap: 10,
