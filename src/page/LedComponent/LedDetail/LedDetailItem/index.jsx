@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 
 import { colors } from '../../../../global/colors';
 import { styles as S } from './styles';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import BottomSheet from '../../../../components/BottomSheet';
 import LedDetailComponent from '../../../LedDetailComponent';
+import { produce } from 'immer';
 
 LedDetailItem.propTypes = {
   kindName: PropTypes.string.isRequired,
@@ -28,21 +29,18 @@ export default function LedDetailItem({ kindName }) {
     setModalState(state);
   }
 
-  const getRgbText = () => {
-    const { R, G, B } = rgb;
+  const getRgbText = useCallback((str) => {
+    return Object.keys(rgb)
+      .map(color => rgb[color])
+      .join(str);
+  }, [rgb])
 
-    return R + "." + G + "." + B;
-  }
-
-  const setRgbText = (r, g, b) => {
-    setRgb((prev) => {
-      return {
-        R: r ?? prev.R,
-        G: g ?? prev.G,
-        B: b ?? prev.B,
-      }
-    });
-  }
+  const setRgbText = useCallback((kind, val) => {
+    setRgb((prev) => produce(prev, (draft) => {
+      draft[kind] = val;
+      return draft;
+    }));
+  }, []);
 
   const onChangeRgbSwitch = () => {
     setRgbSwitch((prev) => !prev);
@@ -53,7 +51,7 @@ export default function LedDetailItem({ kindName }) {
       <View style={S.rgbDetailBox(rgbSwitch)}>
         <View style={S.wrapperTop}>
           <View style={S.rgbIcon}>
-            <MaterialIcons name="lightbulb" size={24} color={rgbSwitch ? colors.text : colors.background} />
+            <MaterialIcons name="lightbulb" size={24} color={rgbSwitch ? `rgb(${getRgbText(',')})` : colors.background} />
           </View>
           <View style={S.rgbNameBox}>
             <Text style={S.rgbName}>{kindName}</Text>
@@ -61,7 +59,7 @@ export default function LedDetailItem({ kindName }) {
         </View>
 
         <View style={S.wrapperBottom}>
-          <Text style={S.rgbValue}>{ getRgbText() }</Text>
+          <Text style={S.rgbValue}>{ getRgbText(',') }</Text>
           <View style={S.rgbBtns}>
             <Switch
               trackColor={{false: '#767577', true: '#81b0ff'}}
@@ -78,7 +76,14 @@ export default function LedDetailItem({ kindName }) {
       </View>
 
       <BottomSheet {...LedDetailModalProps}>
-        <LedDetailComponent kindName={kindName} />
+        <LedDetailComponent
+          kindName={kindName}
+          rgb={rgb}
+          getRgbText={getRgbText}
+          setRgbText={setRgbText}
+          getRgbSwitch={rgbSwitch}
+          setRgbSwitch={onChangeRgbSwitch}
+        />
       </BottomSheet>
     </>
   )
