@@ -1,52 +1,56 @@
 import { Pressable, Switch, Text, View } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useRecoilState } from 'recoil';
 import { useState } from 'react';
 import { produce } from 'immer';
 import Slider from '@react-native-community/slider';
 
 import { colors } from '../../../global/colors';
+import { ledStateOfTotal } from '../../../global/atom';
 import { styles as S } from './styles';
 
 export default function LedTotal() {
-  const [rgb, setRgb] = useState({ R: 0, G: 0, B: 0});
-  const [rgbState, setRgbState] = useState(0);
+  const [totalRGB, setTotalRGB] = useRecoilState(ledStateOfTotal);
   const [rgbBtn, setRgbBtn] = useState('R'); // 'R' | 'G' | 'B'
-  const [rgbSwitch, setRgbSwitch] = useState(false);
+  console.log('Total');
 
   // NOTE: RGB 값 반환
   const getRgbText = (str) => {
-    return Object.keys(rgb)
-      .map(color => rgb[color])
+    return Object.keys(totalRGB.rgb)
+      .map(color => totalRGB.rgb[color])
       .join(str);
   }
 
   // NOTE: RGB 값 변경
   const setRgbText = (kind, val) => {
-    setRgb((prev) => produce(prev, (draft) => {
-      draft[kind] = val;
+    setTotalRGB((prev) => produce(prev, (draft) => {
+      draft.rgb[kind] = val;
       return draft;
     }));
   }
 
   // NOTE: RGB 버튼 선택 상태
   const getRgbButtonState = (state) => {
-    return rgbSwitch && (rgbBtn === state);
+    return totalRGB.switch && (rgbBtn === state);
   }
 
   // NOTE(EventHandler): RGB 값 제어
   const handleRgbState = (value) => {
     value = Math.floor(value);
-    setRgbState(value);
     setRgbText(rgbBtn, value);
   }
 
   // NOTE(EventHandler): On/Off 제어
   const onClickRgbButton = (state) => {
-    if (!rgbSwitch) return;
-    setRgbBtn(() => {
-      setRgbState(rgb[state]);
-      return state;
-    });
+    if (!totalRGB.switch) return;
+    setRgbBtn(state);
+  }
+
+  const onChangeRgbSwitch = () => {
+    setTotalRGB((prev) => produce(prev, (draft) => {
+      draft.switch = !draft.switch
+      return draft;
+    }));
   }
 
   return (
@@ -70,8 +74,8 @@ export default function LedTotal() {
             maximumTrackTintColor={colors.background}
             thumbTintColor={colors.text}
             onValueChange={handleRgbState}
-            value={rgbState}
-            disabled={!rgbSwitch}
+            value={totalRGB.rgb[rgbBtn]}
+            disabled={!totalRGB.switch}
           />
           <Text style={S.rgbSliderText}>255</Text>
         </View>
@@ -100,11 +104,11 @@ export default function LedTotal() {
 
       <View style={S.rgbOnOffBox}>
         <Switch
-          trackColor={{false: '#767577', true: '#81b0ff'}}
+          trackColor={{false: '#767577', true: colors.green}}
           thumbColor={colors.text}
           ios_backgroundColor="#3e3e3e"
-          onValueChange={setRgbSwitch}
-          value={rgbSwitch}
+          onValueChange={onChangeRgbSwitch}
+          value={totalRGB.switch}
         />
       </View>
     </View>

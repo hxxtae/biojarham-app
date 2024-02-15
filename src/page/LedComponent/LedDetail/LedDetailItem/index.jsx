@@ -1,6 +1,6 @@
 import { Switch, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { useCallback, useState } from 'react';
+import { memo, useState } from 'react';
 import { produce } from 'immer';
 import PropTypes from 'prop-types';
 
@@ -11,13 +11,13 @@ import LedDetailComponent from '../../../LedDetailComponent';
 
 LedDetailItem.propTypes = {
   kindName: PropTypes.string.isRequired,
+  detailRGB: PropTypes.object.isRequired,
+  setDetailRGB: PropTypes.func.isRequired
 }
 
-export default function LedDetailItem({ kindName }) {
+function LedDetailItem({ kindName, detailRGB, setDetailRGB }) {
   console.log('detail: ' + kindName)
   const [modalState, setModalState] = useState(false);
-  const [rgb, setRgb] = useState({ R: 0, G: 0, B: 0 });
-  const [rgbSwitch, setRgbSwitch] = useState(false);
 
   const LedDetailModalProps = {
     modalVisible: modalState,
@@ -29,29 +29,32 @@ export default function LedDetailItem({ kindName }) {
     setModalState(state);
   }
 
-  const getRgbText = useCallback((str) => {
-    return Object.keys(rgb)
-      .map(color => rgb[color])
+  const getRgbText = (str) => {
+    return Object.keys(detailRGB.rgb)
+      .map(color => detailRGB.rgb[color])
       .join(str);
-  }, [rgb])
+  }
 
-  const setRgbText = useCallback((kind, val) => {
-    setRgb((prev) => produce(prev, (draft) => {
-      draft[kind] = val;
+  const setRgbText = (kind, val) => {
+    setDetailRGB((prev) => produce(prev, (draft) => {
+      draft.rgb[kind] = val;
       return draft;
     }));
-  }, []);
+  };
 
   const onChangeRgbSwitch = () => {
-    setRgbSwitch((prev) => !prev);
+    setDetailRGB((prev) => produce(prev, (draft) => {
+      draft.switch = !draft.switch
+      return draft;
+    }));
   }
 
   return (
     <>
-      <View style={S.rgbDetailBox(rgbSwitch)}>
+      <View style={S.rgbDetailBox(detailRGB.switch)}>
         <View style={S.wrapperTop}>
           <View style={S.rgbIcon}>
-            <MaterialIcons name="lightbulb" size={24} color={rgbSwitch ? `rgb(${getRgbText(',')})` : colors.background} />
+            <MaterialIcons name="lightbulb" size={24} color={detailRGB.switch ? `rgb(${getRgbText(',')})` : colors.background} />
           </View>
           <View style={S.rgbNameBox}>
             <Text style={S.rgbName}>{kindName}</Text>
@@ -62,11 +65,11 @@ export default function LedDetailItem({ kindName }) {
           <Text style={S.rgbValue}>{ getRgbText(',') }</Text>
           <View style={S.rgbBtns}>
             <Switch
-              trackColor={{false: '#767577', true: '#81b0ff'}}
+              trackColor={{false: '#767577', true: colors.green}}
               thumbColor={colors.text}
               ios_backgroundColor="#3e3e3e"
               onValueChange={onChangeRgbSwitch}
-              value={rgbSwitch}
+              value={detailRGB.switch}
             />
             <TouchableOpacity onPress={() => handleModalState(true)}>
               <Ionicons name="settings-outline" size={24} style={S.ledIcon} color={colors.secondary} />
@@ -78,13 +81,14 @@ export default function LedDetailItem({ kindName }) {
       <BottomSheet {...LedDetailModalProps}>
         <LedDetailComponent
           kindName={kindName}
-          rgb={rgb}
+          detailRGB={detailRGB}
           getRgbText={getRgbText}
           setRgbText={setRgbText}
-          getRgbSwitch={rgbSwitch}
-          setRgbSwitch={onChangeRgbSwitch}
+          onChangeRgbSwitch={onChangeRgbSwitch}
         />
       </BottomSheet>
     </>
   )
 }
+
+export default memo(LedDetailItem);

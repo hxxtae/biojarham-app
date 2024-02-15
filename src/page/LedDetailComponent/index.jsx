@@ -2,7 +2,6 @@ import { Pressable, ScrollView, Switch, Text, View } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
-import { produce } from 'immer';
 import Slider from '@react-native-community/slider';
 import PropTypes from 'prop-types';
 
@@ -11,40 +10,28 @@ import { styles as S } from './styles';
 
 LedDetailComponent.propTypes = {
   kindName: PropTypes.string.isRequired,
-  rgb: PropTypes.object.isRequired,
+  detailRGB: PropTypes.object.isRequired,
   getRgbText: PropTypes.func.isRequired,
   setRgbText: PropTypes.func.isRequired,
-  getRgbSwitch: PropTypes.bool.isRequired,
-  setRgbSwitch: PropTypes.func.isRequired,
+  onChangeRgbSwitch: PropTypes.func.isRequired,
   closeModal: PropTypes.func,
 }
 
-export default function LedDetailComponent({ kindName, rgb, getRgbText, setRgbText, getRgbSwitch, setRgbSwitch, closeModal }) {
-  // console.log(kindName)
-  const [rgbClone, setRgbClone] = useState({...rgb});
-  const [rgbState, setRgbState] = useState(rgb.R ?? 0);
+export default function LedDetailComponent({ kindName, detailRGB, getRgbText, setRgbText, onChangeRgbSwitch, closeModal }) {
   const [rgbBtn, setRgbBtn] = useState('R'); // 'R' | 'G' | 'B'
 
   const handleRgbState = (value) => {
     value = Math.floor(value);
-    setRgbState(value);
-    setRgbClone((prev) => produce(prev, (draft) => {
-      draft[rgbBtn] = value;
-      return draft;
-    }));
     setRgbText(rgbBtn, value);
   }
 
   const getRgbButtonState = (state) => {
-    return getRgbSwitch && (rgbBtn === state);
+    return detailRGB.switch && (rgbBtn === state);
   }
 
   const onClickRgbButton = (state) => {
-    if (!getRgbSwitch) return;
-    setRgbBtn(() => {
-      setRgbState(rgbClone[state]);
-      return state;
-    });
+    if (!detailRGB.switch) return;
+    setRgbBtn(state);
   }
 
   return (
@@ -56,7 +43,7 @@ export default function LedDetailComponent({ kindName, rgb, getRgbText, setRgbTe
         <View style={S.wrapper}>
           <View style={S.ledWrapper}>
             <View style={S.ledBox}>
-              <MaterialIcons name="lightbulb" size={24} color={getRgbSwitch ? `rgb(${getRgbText(',')})` : colors.background} />
+              <MaterialIcons name="lightbulb" size={24} color={detailRGB.switch ? `rgb(${getRgbText(',')})` : colors.background} />
             </View>
           </View>
 
@@ -75,8 +62,8 @@ export default function LedDetailComponent({ kindName, rgb, getRgbText, setRgbTe
                 maximumTrackTintColor={colors.background}
                 thumbTintColor={colors.text}
                 onValueChange={handleRgbState}
-                value={rgbState}
-                disabled={!getRgbSwitch}
+                value={detailRGB.rgb[rgbBtn]}
+                disabled={!detailRGB.switch}
               />
               <Text style={S.rgbSliderText}>255</Text>
             </View>
@@ -105,11 +92,11 @@ export default function LedDetailComponent({ kindName, rgb, getRgbText, setRgbTe
 
           <View style={S.rgbOnOffBox}>
             <Switch
-              trackColor={{false: '#767577', true: '#81b0ff'}}
+              trackColor={{false: '#767577', true: colors.green}}
               thumbColor={colors.text}
               ios_backgroundColor="#3e3e3e"
-              onValueChange={setRgbSwitch}
-              value={getRgbSwitch}
+              onValueChange={onChangeRgbSwitch}
+              value={detailRGB.switch}
             />
           </View>
 
