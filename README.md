@@ -1,12 +1,23 @@
 <div align="center">
   <img 
-    src="https://github.com/hxxtae/biojarham-app/assets/79623316/08db188e-e17e-485e-ab34-17bcd39e666d"
-    style="background-color: #fff; border-radius: 10px"
+    src="https://github.com/hxxtae/biojarham-app/assets/79623316/da4f4f3d-d431-4e17-9322-05ff799dac0c"
     alt="biojarham logo"
   />
 </div>
 
-# Biojarham App
+<br>
+
+<div align="center">
+  <h1>Biojarham App</h1>
+</div>
+
+<div align="center">
+  <a href="https://github.com/hxxtae/biojarham-app/blob/main/LICENSE">
+    <img alt="GitHub License" src="https://img.shields.io/github/license/hxxtae/biojarham-app?style=for-the-badge&labelColor=%23111111&color=%23ffffff">
+  </a>
+</div>
+
+<br>
 
 바이오자람에서 관리되고 사용되는 생명 공학 실험 Iot 앱 입니다.
 
