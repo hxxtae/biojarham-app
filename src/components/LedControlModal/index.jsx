@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import { colors } from '../../global/colors';
 import { styles as S } from './styles';
 
-LedDetailComponent.propTypes = {
+LedControlModal.propTypes = {
   kindName: PropTypes.string.isRequired,
   detailRGB: PropTypes.object.isRequired,
   getRgbText: PropTypes.func.isRequired,
@@ -17,7 +17,7 @@ LedDetailComponent.propTypes = {
   closeModal: PropTypes.func,
 }
 
-export default function LedDetailComponent({ kindName, detailRGB, getRgbText, setRgbText, onChangeRgbSwitch, closeModal }) {
+export default function LedControlModal({ kindName, detailRGB, getRgbText, setRgbText, onChangeRgbSwitch, closeModal }) {
   const [rgbBtn, setRgbBtn] = useState('R'); // 'R' | 'G' | 'B'
 
   const handleRgbState = (value) => {

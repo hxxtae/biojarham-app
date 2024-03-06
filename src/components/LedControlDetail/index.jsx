@@ -4,18 +4,18 @@ import { memo, useState } from 'react';
 import { produce } from 'immer';
 import PropTypes from 'prop-types';
 
-import { colors } from '../../../../global/colors';
+import { colors } from '../../global/colors';
 import { styles as S } from './styles';
-import BottomSheet from '../../../../components/BottomSheet';
-import LedDetailComponent from '../../../LedDetailComponent';
+import BottomSheet from '../BottomSheet';
+import LedControlModal from '../LedControlModal';
 
-LedDetailItem.propTypes = {
+LedControlDetail.propTypes = {
   kindName: PropTypes.string.isRequired,
   detailRGB: PropTypes.object.isRequired,
   setDetailRGB: PropTypes.func.isRequired
 }
 
-function LedDetailItem({ kindName, detailRGB, setDetailRGB }) {
+function LedControlDetail({ kindName, detailRGB, setDetailRGB }) {
   console.log('detail: ' + kindName)
   const [modalState, setModalState] = useState(false);
 
@@ -79,7 +79,7 @@ function LedDetailItem({ kindName, detailRGB, setDetailRGB }) {
       </View>
 
       <BottomSheet {...LedDetailModalProps}>
-        <LedDetailComponent
+        <LedControlModal
           kindName={kindName}
           detailRGB={detailRGB}
           getRgbText={getRgbText}
@@ -91,4 +91,4 @@ function LedDetailItem({ kindName, detailRGB, setDetailRGB }) {
   )
 }
 
-export default memo(LedDetailItem);
+export default memo(LedControlDetail);

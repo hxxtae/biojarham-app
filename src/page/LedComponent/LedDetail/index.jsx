@@ -2,13 +2,13 @@ import { Text, View } from 'react-native';
 import { useRecoilState } from 'recoil';
 
 import { styles as S } from './styles';
-import LedDetailItem from './LedDetailItem';
 import {
   ledStateOfDetail1,
   ledStateOfDetail2,
   ledStateOfDetail3,
   ledStateOfDetail4
 } from '../../../global/atom';
+import LedControlDetail from '../../../components/LedControlDetail';
 
 export default function LedDetail() {
   console.log('Detail');
@@ -25,12 +25,12 @@ export default function LedDetail() {
 
       <View style={S.rgbDetail}>
         <View style={S.rgbDetailWrapper}>
-          <LedDetailItem key={1} kindName='LED 1' detailRGB={detailRGB1} setDetailRGB={setDetailRGB1} />
-          <LedDetailItem key={2} kindName='LED 2' detailRGB={detailRGB2} setDetailRGB={setDetailRGB2} />
+          <LedControlDetail key={1} kindName='LED 1' detailRGB={detailRGB1} setDetailRGB={setDetailRGB1} />
+          <LedControlDetail key={2} kindName='LED 2' detailRGB={detailRGB2} setDetailRGB={setDetailRGB2} />
         </View>
         <View style={S.rgbDetailWrapper}>
-          <LedDetailItem key={3} kindName='LED 3' detailRGB={detailRGB3} setDetailRGB={setDetailRGB3} />
-          <LedDetailItem key={4} kindName='LED 4' detailRGB={detailRGB4} setDetailRGB={setDetailRGB4} />
+          <LedControlDetail key={3} kindName='LED 3' detailRGB={detailRGB3} setDetailRGB={setDetailRGB3} />
+          <LedControlDetail key={4} kindName='LED 4' detailRGB={detailRGB4} setDetailRGB={setDetailRGB4} />
         </View>
       </View>
     </View>
