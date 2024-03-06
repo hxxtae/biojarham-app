@@ -33,7 +33,7 @@
 npx create-expo-app --template
 ```
 
-디바이스에 따른 개발 환경 테스트 Android & Ios가 있습니다.
+디바이스에 따른 개발 환경 테스트는 Android & Ios가 있습니다.
 
 ```text
 npm run android
