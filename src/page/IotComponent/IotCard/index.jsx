@@ -8,10 +8,11 @@ import { styles as S } from './styles';
 
 IotCard.propTypes = {
   title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   desc: PropTypes.string.isRequired,
 }
 
-export default function IotCard({ title, desc }) {
+export default function IotCard({ title, name, desc }) {
   const navigator = useNavigation();
 
   const onClickIot = (iot) => {
@@ -24,7 +25,7 @@ export default function IotCard({ title, desc }) {
         <Text style={S.cardContent}>{desc}</Text>
       </View>
       <TouchableOpacity style={S.cardWrapper2}>
-        <Entypo name="chevron-right" size={24} color={colors.tertiary} onPress={() => onClickIot('Led')} />
+        <Entypo name="chevron-right" size={24} color={colors.tertiary} onPress={() => onClickIot(name)} />
       </TouchableOpacity>
     </View>
   )

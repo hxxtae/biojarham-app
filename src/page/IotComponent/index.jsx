@@ -13,8 +13,8 @@ export default function IotComponent() {
         <View style={S.titleBox}>
           <Text style={S.title}>BIOJARHAM</Text>
         </View>
-        <IotCard title='LED' desc='RGB를 제어하여 미세조류 실험하기.' />
-        <IotCard title='Water Pump' desc='Water 펌프를 제어하여 미세조류 실험하기.' />
+        <IotCard title='LED' name='Led' desc='RGB를 제어하여 미세조류 실험하기.' />
+        <IotCard title='Water Pump' name='Pump' desc='Water 펌프를 제어하여 미세조류 실험하기.' />
       </ScrollView>
       <StatusBar style='light'/>
     </SafeAreaView>
