@@ -19,15 +19,15 @@
 
 <br>
 
+> Only User Interface
+
 바이오자람에서 관리되고 사용되는 생명 공학 실험 Iot 앱 입니다.
 
 해당 Repository는 Iot 앱에서 블루투스 기능을 제외한 UI를 테스트 하기 위해 제작되었습니다.
 
-> Only User Interface
+## Install & Start
 
-## 설치 및 시작
-
-기본 구성으로 `Expo` 템플릿을 사용하였습니다.
+번들로는 `Expo` 템플릿을 사용하였습니다.
 
 ```text
 npx create-expo-app --template
@@ -43,7 +43,9 @@ npm run android
 npm run ios
 ```
 
-## 라이브러리
+## Librarys
+
+> nodejs : v20.10.0
 
 ### Build
 
@@ -52,6 +54,7 @@ npm run ios
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@react-native-async-storage/async-storage": "^1.21.0",
+    "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "expo": "~50.0.6",
@@ -59,9 +62,9 @@ npm run ios
     "immer": "^10.0.3",
     "prop-types": "^15.8.1",
     "react": "18.2.0",
-    "react-native": "0.73.2",
-    "react-native-gesture-handler": "^2.15.0",
-    "react-native-safe-area-context": "^4.9.0",
+    "react-native": "0.73.4",
+    "react-native-gesture-handler": "^2.14.0",
+    "react-native-safe-area-context": "^4.8.2",
     "recoil": "^0.7.7",
     "use-immer": "^0.9.0"
   }
@@ -80,4 +83,79 @@ npm run ios
 }
 ```
 
-> nodejs : v20.10.0
+## Directories & Files
+
+### Js
+
+```
+📦global
+ ┣ 📜atom.js
+ ┗ 📜colors.js
+```
+
+### Components
+
+```
+📦components
+ ┣ 📂BottomSheet
+ ┃ ┗ 📜index.jsx
+ ┣ 📂LedControlDetail
+ ┃ ┣ 📜index.jsx
+ ┃ ┗ 📜styles.js
+ ┗ 📂LedControlModal
+ ┃ ┣ 📜index.jsx
+ ┃ ┗ 📜styles.js
+
+📦navigation
+ ┣ 📂MainNavigator
+ ┃ ┗ 📜index.jsx
+ ┣ 📂StackNavigatorIot
+ ┃ ┗ 📜index.jsx
+ ┗ 📂TabNavigator
+ ┃ ┗ 📜index.jsx
+
+📦page
+ ┣ 📂homeComponent
+ ┃ ┣ 📜index.jsx
+ ┃ ┗ 📜styles.js
+ ┣ 📂IotComponent
+ ┃ ┣ 📂IotCard
+ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┗ 📜styles.js
+ ┃ ┣ 📜index.jsx
+ ┃ ┗ 📜styles.js
+ ┣ 📂LedComponent
+ ┃ ┣ 📂LedDetail
+ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┗ 📜styles.js
+ ┃ ┣ 📂LedPower
+ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┗ 📜styles.js
+ ┃ ┣ 📂LedTotal
+ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┗ 📜styles.js
+ ┃ ┣ 📜index.jsx
+ ┃ ┗ 📜styles.js
+ ┗ 📂PumpComponent
+ ┃ ┣ 📂PumpPower
+ ┃ ┃ ┣ 📜index.jsx
+ ┃ ┃ ┗ 📜styles.js
+ ┃ ┣ 📜index.jsx
+ ┃ ┗ 📜styles.js
+```
+
+## App Image
+
+| IotComponent | LEDComponent | PumpComponent |
+| ------------ | ------------ | ------------- |
+| ![IotPage]   | ![LedPage]   | ![PumpPage]   |
+|              | ![LedDetailPage] |           |
+
+[PumpPage]: https://github.com/hxxtae/biojarham-app/assets/79623316/9ef369a0-5e54-47bd-b4d9-1a8e494a01c3
+[IotPage]: https://github.com/hxxtae/biojarham-app/assets/79623316/e6c43237-d3ae-4776-877b-af47f573a1ae
+[LedPage]: https://github.com/hxxtae/biojarham-app/assets/79623316/2f95ff50-a18b-450d-9b0b-8481d0239007
+[LedDetailPage]: https://github.com/hxxtae/biojarham-app/assets/79623316/30f0f841-9918-4657-8f34-8b6d6ee625c8
+
+## Author
+
+[hxxtae](https://github.com/hxxtae)
