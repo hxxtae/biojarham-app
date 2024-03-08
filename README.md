@@ -25,6 +25,8 @@
 
 해당 Repository는 Iot 앱에서 블루투스 기능을 제외한 UI를 테스트 하기 위해 제작되었습니다.
 
+<img alt="biojarham led experiment" src="https://github.com/brave-people/brave-tech-interview/assets/79623316/14e76143-e00d-435f-8e18-27d12437f9b8" style="border-radius: 20px">
+
 ## Install & Start
 
 번들로는 `Expo` 템플릿을 사용하였습니다.
