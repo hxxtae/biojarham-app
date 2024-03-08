@@ -109,24 +109,24 @@ npm run ios
  ┃ ┗ 📜styles.js
 
 📦navigation
- ┣ 📂MainNavigator
+ ┣ 📂MainNavigator --> Main Nav
  ┃ ┗ 📜index.jsx
- ┣ 📂StackNavigatorIot
+ ┣ 📂StackNavigatorIot --> Tab Stack Nav
  ┃ ┗ 📜index.jsx
- ┗ 📂TabNavigator
+ ┗ 📂TabNavigator --> Tab Nav
  ┃ ┗ 📜index.jsx
 
 📦page
- ┣ 📂homeComponent
+ ┣ 📂homeComponent --> Page1: Home
  ┃ ┣ 📜index.jsx
  ┃ ┗ 📜styles.js
- ┣ 📂IotComponent
+ ┣ 📂IotComponent --> Page2: Iot
  ┃ ┣ 📂IotCard
  ┃ ┃ ┣ 📜index.jsx
  ┃ ┃ ┗ 📜styles.js
  ┃ ┣ 📜index.jsx
  ┃ ┗ 📜styles.js
- ┣ 📂LedComponent
+ ┣ 📂LedComponent --> Page3: Led
  ┃ ┣ 📂LedDetail
  ┃ ┃ ┣ 📜index.jsx
  ┃ ┃ ┗ 📜styles.js
@@ -138,7 +138,7 @@ npm run ios
  ┃ ┃ ┗ 📜styles.js
  ┃ ┣ 📜index.jsx
  ┃ ┗ 📜styles.js
- ┗ 📂PumpComponent
+ ┗ 📂PumpComponent --> Page4: Pump
  ┃ ┣ 📂PumpPower
  ┃ ┃ ┣ 📜index.jsx
  ┃ ┃ ┗ 📜styles.js
